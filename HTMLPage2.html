@@ -1,0 +1,104 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2 Dakikalık Geri Sayım</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #fff;
+            margin-bottom: 40px;
+        }
+
+        #countdown {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            font-size: 2rem;
+            color: #fff;
+        }
+
+        .time-box {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+            .time-box span {
+                display: block;
+                font-size: 3rem;
+                margin-bottom: 10px;
+            }
+
+            .time-box small {
+                font-size: 1rem;
+                text-transform: uppercase;
+                color: #e0e0e0;
+            }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>2 Dakika İçinde Sürpriz!</h1>
+        <div id="countdown">
+            <div class="time-box">
+                <span id="minutes">00</span>
+                <small>Dakika</small>
+            </div>
+            <div class="time-box">
+                <span id="seconds">00</span>
+                <small>Saniye</small>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 2 dakika geri sayım için hedef zaman
+        var countdownTime = new Date().getTime() + 2 * 60 * 1000; // 2 dakikaya ayarlanmış zaman
+
+        // Her saniye geri sayımı güncelleyen fonksiyon
+        var x = setInterval(function() {
+            var now = new Date().getTime();
+            var distance = countdownTime - now;
+
+            // Dakika ve saniyeleri hesapla
+            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // HTML içindeki zamanlayıcı değerlerini güncelle
+            document.getElementById("minutes").innerHTML = minutes;
+            document.getElementById("seconds").innerHTML = seconds;
+
+            // Eğer geri sayım sona erdiyse, başka bir sayfaya yönlendir
+            if (distance < 0) {
+                clearInterval(x);
+                window.location.href = "mesaj.html"; // Zamanlayıcı sıfırlanınca yönlendirilecek sayfa
+            }
+        }, 1000);
+    </script>
+</body>
+</html>
